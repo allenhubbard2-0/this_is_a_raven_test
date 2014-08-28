@@ -1,0 +1,27 @@
+<?php
+$analysis = $_POST['crunch'];
+echo "$analysis is analysis";
+$toScan = "/var/www/subdirectories_for_interface/$analysis";
+echo $toScan;
+echo "is the place to scan!!!!";
+$files = scandir("$toScan");
+$imagePath = "test_output";
+foreach($files as $file)
+{
+	if ($file !== "." and $file !== "..")
+	{
+		$pattern = "/(.*).png/";
+		preg_match($pattern, $file, $matches);
+		$title = $matches[1];
+		#echo $title;
+		if(strlen($title) > 0)
+		{				
+			echo "<h2><center>".$title."</center></h2>";
+			echo "<img src=\"$imagePath/$file\" alt=\"fRNAkenstein\" width=\"480\" > </td> <br> <br>";
+			echo "<a href=\"$imagePath/$file\" download=\"$title\" title=\"Download\"><center>Download this image</center></a><br><br><hr>";
+		}	
+	}
+}
+
+http://localhost/diag_test_diagram
+?>
